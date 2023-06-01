@@ -1,6 +1,5 @@
 package com.getUser.getUserAPI.OtherSolutions;
 
-
 public class SudokuSolution {
 
     public static void main(String[] args) {
@@ -8,11 +7,33 @@ public class SudokuSolution {
                 3, 1}, {0, 0, 3, 0, 1, 0, 0, 8, 0}, {9, 0, 0, 8, 6, 3, 0, 0, 5}, {0, 5, 0, 0, 9, 0, 6, 0, 0}, {1, 3,
                 0, 0, 0, 0, 2, 5, 0}, {0, 0, 0, 0, 0, 0, 0, 7, 4}, {0, 0, 5, 2, 0, 6, 3, 0, 0}};
 
-        if (solveSudoku(sudoku, 0, 0)) {
-            print(sudoku);
+        int [][] solvedSudoku = new int[sudoku.length][sudoku.length];
+        for (int i = 0; i < sudoku.length; i++) {
+            for (int j = 0; j < sudoku.length; j++) {
+                solvedSudoku[i][j] = sudoku[i][j];
+            }
         }
+        int row = 0;
+        int col = 1;
+        int num = 1;
+
+        if (solveSudoku(solvedSudoku, 0, 0)) {
+            checkValid(sudoku, solvedSudoku, row, col, num);
+        }
+//        print(solvedSudoku);
+//        print(sudoku);
     }
 
+
+    public static void checkValid(int[][] sudoku, int[][] solvedSudoku, int row, int col, int num){
+        if(solvedSudoku[row][col] != num){
+            System.out.println("Number is invalid");
+        }else if(solvedSudoku[row][col] == num && sudoku[row][col] == num){
+            System.out.println("Number already filled");
+        }else{
+            System.out.println("Number is Valid");
+        }
+    }
     public static boolean isSafe(int[][] sudoku, int row, int col, int num) {
         //condition for row and col
         for (int i = 0; i < sudoku.length; i++) {
